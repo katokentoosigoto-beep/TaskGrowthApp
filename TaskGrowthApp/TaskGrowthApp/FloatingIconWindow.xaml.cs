@@ -46,14 +46,24 @@ namespace TaskGrowthApp
                 _floatSb = (Storyboard)FindResource("FloatLoop");
                 _floatSb.Begin();
 
-                // ★ 絶対パスで動画をセットして再生
-                var videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "character.mp4");
+                // ★ 初期ロード時のファイル名変更
+                var videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "character_1.mp4");
                 if (File.Exists(videoPath))
                 {
                     CharVideo.Source = new Uri(videoPath);
                     CharVideo.Play();
+
+                    // ★ ループ時の処理を書き換え
                     CharVideo.MediaEnded += (s, e) =>
                     {
+                        string fileName = GetRandomVideoFileName();
+                        var nextVideoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", fileName);
+
+                        if (File.Exists(nextVideoPath))
+                        {
+                            CharVideo.Source = new Uri(nextVideoPath);
+                        }
+
                         CharVideo.Position = TimeSpan.Zero;
                         CharVideo.Play();
                     };
@@ -156,6 +166,20 @@ namespace TaskGrowthApp
             menu.Items.Add(new Separator());
             menu.Items.Add(itemQuit);
             menu.IsOpen = true;
+        }
+
+        // ★ 乱数生成器を追加（すでに追加済みの場合はそのままでOK）
+        private readonly Random _random = new();
+
+        // ★ こちらにも抽選メソッドを追加
+        private string GetRandomVideoFileName()
+        {
+            int rand = _random.Next(100);
+            if (rand < 60) return "character_1.mp4"; // 60%
+            if (rand < 70) return "character_2.mp4"; // 10%
+            if (rand < 80) return "character_3.mp4"; // 10%
+            if (rand < 90) return "character_4.mp4"; // 10%
+            return "character_5.mp4";                // 10%
         }
     }
 }

@@ -49,7 +49,7 @@ namespace TaskGrowthApp
         private async void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             // ★ 絶対パスで動画をセットして再生
-            var videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "character.mp4");
+            var videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "character_1.mp4");
             if (File.Exists(videoPath))
             {
                 CharacterVideo.Source = new Uri(videoPath);
@@ -77,9 +77,31 @@ namespace TaskGrowthApp
             RefreshDueDateDisplay();
         }
 
+        private string GetRandomVideoFileName()
+        {
+            int rand = _random.Next(100); // 0〜99の乱数を取得
+
+            // 確率の振り分け（合計が100になるように調整）
+            if (rand < 60) return "character_1.mp4"; // 60% の確率（基本の動き）
+            if (rand < 70) return "character_2.mp4"; // 10% の確率
+            if (rand < 80) return "character_3.mp4"; // 10% の確率
+            if (rand < 90) return "character_4.mp4"; // 10% の確率
+
+            return "character_5.mp4";                // 残りの10%
+        }
+
         // ★ 動画ループ
         private void CharacterVideo_MediaEnded(object sender, RoutedEventArgs e)
         {
+            // 専用メソッドを呼んで、次に再生するファイル名を取得
+            string fileName = GetRandomVideoFileName();
+
+            var videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", fileName);
+            if (File.Exists(videoPath))
+            {
+                CharacterVideo.Source = new Uri(videoPath);
+            }
+
             CharacterVideo.Position = TimeSpan.Zero;
             CharacterVideo.Play();
         }
