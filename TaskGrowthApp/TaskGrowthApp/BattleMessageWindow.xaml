@@ -1,0 +1,54 @@
+<Window x:Class="TaskGrowthApp.BattleMessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="280"
+        Height="Auto"
+        MinHeight="80"
+        SizeToContent="Height"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Black"
+        Opacity="1"
+        WindowStartupLocation="Manual">
+
+    <Window.Resources>
+        <!-- 表示時フェードイン -->
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             From="0" To="1"
+                             Duration="0:0:0.2"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard Storyboard="{StaticResource FadeIn}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Border BorderBrush="White" BorderThickness="2" Padding="14,10">
+        <StackPanel>
+            <!-- タイトルバー代わりの装飾ライン -->
+            <TextBlock Text="▼ メッセージ"
+                       FontFamily="Consolas"
+                       FontSize="9"
+                       Foreground="#888888"
+                       Margin="0,0,0,6"/>
+
+            <TextBlock x:Name="MessageText"
+                       Foreground="White"
+                       FontFamily="Consolas"
+                       FontSize="13"
+                       TextWrapping="Wrap"
+                       LineHeight="20"/>
+
+            <!-- クリックヒント -->
+            <TextBlock Text="[ クリックで閉じる ]"
+                       FontFamily="Consolas"
+                       FontSize="9"
+                       Foreground="#555555"
+                       HorizontalAlignment="Right"
+                       Margin="0,8,0,0"/>
+        </StackPanel>
+    </Border>
+</Window>
