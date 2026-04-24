@@ -11,6 +11,10 @@
   <ItemGroup>
     <None Remove="Resources\character.mp4" />
     <None Remove="Resources\character.png" />
+    <None Remove="Resources\character_1.mp4" />
+    <None Remove="Resources\character_2.mp4" />
+    <None Remove="Resources\character_3.mp4" />
+    <None Remove="Resources\character_4.mp4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +28,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Resources\character.png" />
+    <Resource Include="Resources\character_1.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\character_2.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\character_3.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\character_4.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

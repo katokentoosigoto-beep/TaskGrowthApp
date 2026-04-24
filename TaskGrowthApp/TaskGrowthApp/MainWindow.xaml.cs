@@ -83,9 +83,8 @@ namespace TaskGrowthApp
 
             // 確率の振り分け（合計が100になるように調整）
             if (rand < 60) return "character_1.mp4"; // 60% の確率（基本の動き）
-            if (rand < 70) return "character_2.mp4"; // 10% の確率
-            if (rand < 80) return "character_3.mp4"; // 10% の確率
-            if (rand < 90) return "character_4.mp4"; // 10% の確率
+            if (rand < 80) return "character_2.mp4"; // 10% の確率
+            if (rand < 95) return "character_3.mp4"; // 10% の確率
 
             return "character_5.mp4";                // 残りの10%
         }
